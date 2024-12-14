@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1900" height="1080" onload="activa(evt)">
+<script><![CDATA[
+var antes=new Date();
+var h,m,s,segundos,minutos,horas;
+function activa(evt){
+ h=evt.target.ownerDocument.getElementById("horas");
+ m=evt.target.ownerDocument.getElementById("minutos");
+ s=evt.target.ownerDocument.getElementById("segundos");
+ Rotor();
+}
+function Rotor(){
+   var enCurso=new Date();
+   for(;antes.getSeconds()==enCurso.getSeconds();enCurso=new Date());
+   antes=new Date();
+   segundos=enCurso.getSeconds();
+   s.setAttribute("transform","rotate("+(segundos*6)+")");
+   minutos=enCurso.getMinutes();//getMinutes();getHours();
+   m.setAttribute("transform","rotate("+((minutos+segundos/60)*6)+")");
+   horas=enCurso.getHours();
+   h.setAttribute("transform","rotate("+((horas+minutos/60+segundos/3600)*30)+")");
+
+
+   setTimeout("Rotor()", 900)
+}
+windows.Rotor()=Rotor();
+]]></script>
+ <g transform="translate(900,540),rotate(-0.45)">
+  <!-- 2*pi*520/360=9.07571-->
+  <circle cx="0" cy="0" r="520" stroke="#000" stroke-width="30" fill="none" stroke-dasharray="9,263.2713"/>
+ </g>
+
+ <g transform="translate(900,540),rotate(-0.19)">
+  <!-- 2*pi*520/60=54,45426 -->
+  <circle cx="0" cy="0" r="520" stroke="#000" stroke-width="30" fill="none" stroke-dasharray="4,50.4543"/>
+ </g>
+ <g font-size="200" stroke="#000" stroke-width="3">
+  <text x="0" y="0" transform="matrix(0.5,0,0,1,830,180)">Ⅻ</text>
+  <text x="0" y="0" transform="matrix(0.433,0.25,-0.5,0.866,1066,220)">Ⅰ</text>
+  <text x="0" y="0" transform="matrix(0.25,0.433,-0.866,0.5,1195,335)">Ⅱ</text>
+  <text x="0" y="0" transform="matrix(0,0.5,-1,0,1260,495)">Ⅲ</text>
+  <text x="0" y="0" transform="matrix(-0.25,0.433,-0.866,-0.5,1235,674)">Ⅳ</text>
+  <text x="0" y="0" transform="matrix(-0.433,0.25,-0.5,-0.866,1112,832)">Ⅴ</text>
+  <text x="0" y="0" transform="matrix(-0.5,0,0,-1,950,900)">Ⅵ</text>
+  <text x="0" y="0" transform="matrix(-0.433,-0.25,0.5,-0.866,780,885)">Ⅶ</text>
+  <text x="0" y="0" transform="matrix(-0.25,-0.433,0.866,-0.5,636,792)">Ⅷ</text>
+  <text x="0" y="0" transform="matrix(0,-0.5,1,0,545,595)">Ⅸ</text>
+  <text x="0" y="0" transform="matrix(0.25,-0.433,0.866,0.5,572,395)">Ⅹ</text>
+  <text x="0" y="0" transform="matrix(0.433,-0.25,0.5,0.866,676,254)">Ⅺ</text>
+ </g>
+ <g transform="translate(900,540)">
+  <path id="horas" d="m15,0v-300h-30v300z" stroke="none" fill="#000"/>
+  <path id="minutos" d="m8,0v-430h-16v430z" stroke="none" fill="#000"/>
+  <path id="segundos" d="m4,0v-500h-8v500z" stroke="none" fill="#f00"/>
+ </g>
+</svg>
