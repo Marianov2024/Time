@@ -1,8 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1900" height="1080" onload="activa(evt)">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" onload="activa(evt)">
 <script><![CDATA[
 var antes=new Date();
 var h,m,s,segundos,minutos,horas;
+var estadoT1=0,tv,noche,simbolo1;
 function activa(evt){
+ tv=evt.target.ownerDocument.getElementById("fondo");
+ noche=evt.target.ownerDocument.getElementById("negro");
+ simbolo1=evt.target.ownerDocument.getElementById("dibu");
  h=evt.target.ownerDocument.getElementById("horas");
  m=evt.target.ownerDocument.getElementById("minutos");
  s=evt.target.ownerDocument.getElementById("segundos");
@@ -22,18 +26,75 @@ function Rotor(){
 
    setTimeout("Rotor()", 900)
 }
+function pulsa1(evt){
+ if(estadoT1==0){
+  estadoT1=1;
+  tv.setAttribute("fill","#000");
+  noche.setAttribute("stroke","#fff");
+  noche.setAttribute("fill","#fff");
+  simbolo1.setAttribute("d","m25,22a5,5 0,1,0 10,10a5,5 0,1,0 -10,-10z");
+ }
+ else{
+  estadoT1=0;
+  tv.setAttribute("fill","#fff");
+  noche.setAttribute("stroke","#000");
+  noche.setAttribute("fill","#000");
+  simbolo1.setAttribute("d","m27,20a5,5 0,1,0 10,10a8,8 0,1,1 -10,-10z");
+ }
+}
 windows.Rotor()=Rotor();
 ]]></script>
+ <rect id="fondo" x="-10" y="-100" height="3000" width="3000" stroke="none" fill="#fff"/>
+
+<defs>
+ <linearGradient x1="0" y1="0" x2="1" y2="0.1" id="g">
+  <stop offset="0.1" stop-color="#a3cad9"/>  <stop offset="0.8" stop-color="#162127"/>  <stop offset="1" stop-color="#061117"/>
+ </linearGradient>
+ <linearGradient x1="0" y1="0" x2="0" y2="1" id="g2">
+  <stop offset="0" stop-color="#fff"/>  <stop offset="0.8" stop-color="#a3cad9"/>  <stop offset="1" stop-color="#162127"/>
+ </linearGradient>
+ <linearGradient x1="0" y1="0" x2="0" y2="1" id="g3">
+  <stop offset="0" stop-color="#061117"/><stop offset="0.3" stop-color="#465157"/>  <stop offset="0.7" stop-color="#465157"/>  <stop offset="1" stop-color="#061117"/>
+ </linearGradient>
+ <linearGradient x1="0" y1="1" x2="1" y2="0" id="g4">
+  <stop offset="0" stop-color="#fff"/><stop offset="0.1" stop-color="#a3cad9"/>  <stop offset="0.5" stop-color="#364147"/>  <stop offset="1" stop-color="#061117"/>
+ </linearGradient>
+ <linearGradient x1="0" y1="0.8" x2="1" y2="0" id="g5">
+  <stop offset="0.35" stop-color="#aff"/><stop offset="0.4" stop-color="#061117"/>  <stop offset="0.8" stop-color="#364147"/>  <stop offset="1" stop-color="#061117"/>
+ </linearGradient>
+ <linearGradient x1="0" y1="0" x2="1" y2="0.8" id="g6">
+  <stop offset="0.46" stop-color="#061117"/><stop offset="0.5" stop-color="#aff"/>  <stop offset="0.54" stop-color="#364147"/>  <stop offset="1" stop-color="#061117"/>
+ </linearGradient>
+ <g id="tecla">
+  <path d="m40,10l-20,0 -10,17.3205 10,17.3205h20l10,-17.3205z" fill="url(#g)" stroke="#000" stroke-width="4"/>
+  <path d="m21,43l-2,3 -10.9,-18.6 11,-19 2,3 -9,16z" fill="url(#g2)" stroke="none"/>
+  <path d="m21,43l-2,3 22,0 -2,-3z" fill="url(#g3)" stroke="none"/>
+  <path d="m19,8.4l2,3 18,0 2,-3" fill="url(#g4)" stroke="none"/>
+  <path d="m40.8,8.5l-2,3 9,15.8 4,0z" fill="url(#g5)" stroke="none"/>
+  <path d="m52,27.3l-4.2,0 -8.8,15.7 2,3z" fill="url(#g6)" stroke="none"/>
+ </g>
+</defs>
+<g id="tecla1">
+ <path d="m40,10l-20,0 -10,17.3205 10,17.3205h20l10,-17.3205z" stroke="#ccc" stroke-width="8" fill="none"/>
+ <use id="bajo" x="0" y="0" xlink:href="#teclaCerrada"/>  <g onmousedown="pulsa1(evt)">
+  <use xlink:href="#tecla"/>
+  <g id="sobre" filter="none">
+   <path id="dibu" d="m27,20a5,5 0,1,0 10,10a8,8 0,1,1 -10,-10z" fill="#ccb" stroke="#ccb" stroke-width="1" stroke-linejoin="miter" stroke-miterlimit="6"/>
+  </g>
+ </g>
+</g>
+
+<g id="negro" stroke="#000" fill="#000">
  <g transform="translate(900,540),rotate(-0.45)">
-  <!-- 2*pi*520/360=9.07571-->
-  <circle cx="0" cy="0" r="520" stroke="#000" stroke-width="30" fill="none" stroke-dasharray="9,263.2713"/>
+  <!-- 2*pi*520/360=9.07571   horas -->
+  <circle cx="0" cy="0" r="520" stroke-width="30" fill="none" stroke-dasharray="9,263.2713"/>
  </g>
 
  <g transform="translate(900,540),rotate(-0.19)">
-  <!-- 2*pi*520/60=54,45426 -->
-  <circle cx="0" cy="0" r="520" stroke="#000" stroke-width="30" fill="none" stroke-dasharray="4,50.4543"/>
+  <!-- 2*pi*520/60=54,45426   minutos -->
+  <circle cx="0" cy="0" r="520" stroke-width="30" fill="none" stroke-dasharray="4,50.4543"/>
  </g>
- <g font-size="200" stroke="#000" stroke-width="3">
+ <g font-size="200" stroke-width="3">
   <text x="0" y="0" transform="matrix(0.5,0,0,1,830,180)">Ⅻ</text>
   <text x="0" y="0" transform="matrix(0.433,0.25,-0.5,0.866,1066,220)">Ⅰ</text>
   <text x="0" y="0" transform="matrix(0.25,0.433,-0.866,0.5,1195,335)">Ⅱ</text>
@@ -48,8 +109,9 @@ windows.Rotor()=Rotor();
   <text x="0" y="0" transform="matrix(0.433,-0.25,0.5,0.866,676,254)">Ⅺ</text>
  </g>
  <g transform="translate(900,540)">
-  <path id="horas" d="m15,0v-300h-30v300z" stroke="none" fill="#000"/>
-  <path id="minutos" d="m8,0v-430h-16v430z" stroke="none" fill="#000"/>
+  <path id="horas" d="m15,0v-300h-30v300z" stroke="none"/>
+  <path id="minutos" d="m8,0v-430h-16v430z" stroke="none"/>
   <path id="segundos" d="m4,0v-500h-8v500z" stroke="none" fill="#f00"/>
  </g>
+</g>
 </svg>
